@@ -1,1 +1,49 @@
-Este é um projeto em php
+Projeto PHP - foco em infraestrutura (DevOps)
+
+Este projeto tem como finalidade criar uma suite de aplicações
+que sigam os principios dos 12 fatores para aplicações 
+(The Twelve-Factor App), de forma que o repositório seja autosuficiente,
+aqui deve conter todas as branchs mínimas necessárias(test, master e dev),
+para um trabalho em conjunto.
+
+Como linguagem padrão utilizaremos o PHP como core (podendo ou não existir 
+integrações com aplicações escritas em outras linguagens), o intuito é subir 
+uma aplicação autosufiente, modular e escalável, com aspéctos declarativos 
+de forma que a manutenção seja facilitada. Estes e outros exemplos de como 
+funcionam aplicações com este perfil, encontram-se no site: 
+https://12factor.net/pt_br/
+
+
+
+##################################################
+
+Breve explicação sobre como lançar a aplicação:
+
+##################################################
+
+Explicando os conceitos por trás de cada aplicação:
+
+I. Base de Código
+Uma base de código com rastreamento utilizando controle de revisão, muitos deploys
+II. Dependências
+Declare e isole as dependências
+III. Configurações
+Armazene as configurações no ambiente
+IV. Serviços de Apoio
+Trate os serviços de apoio, como recursos ligados
+V. Construa, lance, execute
+Separe estritamente os builds e execute em estágios
+VI. Processos
+Execute a aplicação como um ou mais processos que não armazenam estado
+VII. Vínculo de porta
+Exporte serviços por ligação de porta
+VIII. Concorrência
+Dimensione por um modelo de processo
+IX. Descartabilidade
+Maximizar a robustez com inicialização e desligamento rápido
+X. Dev/prod semelhantes
+Mantenha o desenvolvimento, teste, produção o mais semelhante possível
+XI. Logs
+Trate logs como fluxo de eventos
+XII. Processos de Admin
+Executar tarefas de administração/gerenciamento como processos pontuais
