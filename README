@@ -91,3 +91,8 @@ git branch dev && git branch test # criamos as branches dev e test
 A atenção se remonta a partir de agora para a branch dev, onde desenvolveremos a aplicação, para no final fazermos um merge na branch master, a branch dev deve se concentra em softwares para auxiliar o desenvolvimento em computadores locais, o ambiente deve ser enxuto com todas as variáveis simplificadas, coisas como banco de dados otimizado, variáveis simplificadas, bibliotecas de debug e etc.
 
 A branch test deve conter os testes automatizados de distribuição, para que possamos verificar se a aplicação está funcionando corretamente, e assim gerando um merge na branch master. Todo fluxo da branch dev, assim que commitado e recebido push, deve ser megiado na test para após os testes subir para a master) mas isso fica para uma outra oportunidade, por enquanto tratamos isso como um conceito).
+
+Step 2 - Dependências, declarando tudo em um arquivo de configuração
+
+Aqui começamos a mexer com Dockerfiles para descrever nossas dependencias, é onde começamos a utilizar os
+softwares de automatização, um deles é o docker, em conjunto com o docker-compose
