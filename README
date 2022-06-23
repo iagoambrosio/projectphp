@@ -54,3 +54,33 @@ referência adicional
 
 https://stack.desenvolvedor.expert/appendix/docker/
 
+#####################################################
+
+Step 1 - A base de tudo e a história da sua aplicação
+
+Para ter um controle da aplicação, a melhor forma (e a determinante nos dias de hoje)
+é com repositórios git, diversas são as arquiteturas para se controlar uma aplicação,
+vai de acordo com a complexidade dos seus serviços, entre elas técnicas como monorepos
+e repositórios variados. Para o Projeto PHP, escolhi a utilização de um repositório 
+único, porque irei lidar apenas com alguns serviços, não muito grandes ao ponto da 
+necessidade de serem repartidos entre equipes.
+
+Começamos criando um repositório.
+
+git init # inicializa o repositório
+
+git add . # adiciona todos os arquivos, neste caso, apenas este README
+
+git commit -m "Adicionando readme, first commit" #Empacotamos as alterações e atribuimos um hash a ela
+
+git remote add origin  https://github.com/iagoambrosio/projectphp  master # adicionamos este repositório remoto na branch master
+
+git push -u origin master # envia as alterações para o repositório remoto na branch princial (master)
+
+git restore --source=master . # restaura o diretório de trabalho para o estado anterior ao commit
+ou
+git reset --hard master # redefine o HEAD atual para o estado da branch master, tanto HEAD quanto WORKDIR são 
+resetados
+
+git reset --soft master # redefine o HEAD atual para o estado da branch master, apenas o HEAD é redefinido, não apaga arquivos
+
