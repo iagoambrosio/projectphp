@@ -19,6 +19,42 @@ https://12factor.net/pt_br/
 
 Breve explicação sobre como lançar a aplicação:
 
+
+Primeiro desinstalamos versões anteriores:
+
+sudo apt-get remove docker docker-engine docker.io containerd runc
+
+Em seguida, instalamos algumas das dependências para termos a versão correta do repositório
+
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+Adicionamos a GPG keyringS:
+
+
+sudo mkdir -p /etc/apt/keyrings &&
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+
+Adicionando repositório na lista de fontes de instalação :
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+E por fim atualizamos os repositórios e instalamos uma versão específica, neste caso a <5:20.10.17~3-0~ubuntu-focal>, 1.6.6-1, e 2.6.0~ubuntu-focal,
+colocarei como variável de ambiente desta forma:
+
+export DOCKER_VERSAO=5:20.10.17~3-0~ubuntu-focal
+export CONTAINERD_VERSAO=1.6.6-1
+export DOCKER_COMPOSE_PLUGIN_VERSAO=2.6.0~ubuntu-focal
+
+sudo apt-get install docker-ce=$DOCKER_VERSAO docker-ce-cli=$DOCKER_VERSAO containerd.io=$CONTAINERD_VERSAO docker-compose-plugin=$DOCKER_COMPOSE_PLUGIN_VERSAO
+
+
 ##################################################
 
 Explicando os conceitos por trás de cada aplicação:
@@ -99,40 +135,21 @@ deve ser megiado na test para após os testes subir para a master( mas isso fica
 
 Step 2 - Dependências, declarando tudo em um arquivo de configuração
 
+Para melhor adequarmos a aplicação, colocarei aqui as versões utilizadas na alicação
+para fins de referência:
+
+Servidor web: nginx:1.22.0
+Banco de dados: mysql:
+Redis:
+Php:
+Wordpress:
+Certificados digitais ssl:
+Docker: 5:20.10.17~3-0~ubuntu-focal
+Containerd: 1.6.6-1
+Plugin docker-compose 2.6.0~ubuntu-focal
+
 Aqui começamos a mexer com Dockerfiles para descrever nossas dependencias, é onde começamos a utilizar os
 softwares de automatização, um deles é o docker, em conjunto com o docker-compose, para isso, iremos fazer a instalação padrão do docker e do Docker-compose:
 
-Primeiro desinstalamos versões anteriores:
 
-sudo apt-get remove docker docker-engine docker.io containerd runc
-
-Em seguida, instalamos algumas das dependências para termos a versão correta do repositório
-
-sudo apt-get install \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
-
-Adicionamos a GPG keyringS:
-
-
-sudo mkdir -p /etc/apt/keyrings &&
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-
-
-Adicionando repositório na lista de fontes de instalação :
-
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-E por fim atualizamos os repositórios e instalamos uma versão específica, neste caso a <5:20.10.17~3-0~ubuntu-focal>, 1.6.6-1, e 2.6.0~ubuntu-focal,
-colocarei como variável de ambiente desta forma:
-
-export DOCKER_VERSAO=5:20.10.17~3-0~ubuntu-focal
-export CONTAINERD_VERSAO=1.6.6-1
-export DOCKER_COMPOSE_PLUGIN_VERSAO=2.6.0~ubuntu-focal
-
-sudo apt-get install docker-ce=$DOCKER_VERSAO docker-ce-cli=$DOCKER_VERSAO containerd.io=$CONTAINERD_VERSAO docker-compose-plugin=$DOCKER_COMPOSE_PLUGIN_VERSAO
 
