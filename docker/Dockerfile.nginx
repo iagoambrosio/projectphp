@@ -1,3 +1,6 @@
 FROM nginx:1.22.0
-EXPOSE 80
+COPY ./docker/nginx/nginx.conf /etc/nginx/
+COPY ./docker/nginx/default.conf /etc/nginx/conf.d/
+EXPOSE 8080
+CMD ["nginx", "-s", "reload"]
 CMD ["nginx", "-g", "daemon off;"]
