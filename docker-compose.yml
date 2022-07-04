@@ -1,0 +1,8 @@
+#
+  services:
+    sftp
+    mysql
+    php
+    nginx
+
+

@@ -7,9 +7,9 @@ RUN mkdir -p /home/wordpress/.ssh && mkdir -p /home/wordpress/site
 # Copy the ssh public key in the authorized_keys file. The idkey.pub below is a public key file you get from ssh-keygen. They are under ~/.ssh directory by default.
 COPY ./docker/sftp/id_rsa.pub /home/wordpress/.ssh/authorized_keys
 # change ownership of the key file. 
-RUN chown wordpress:wordpress /home/wordpress/.ssh/authorized_keys && chmod 600 /home/wordpress/.ssh/authorized_keys && chown wordpress:wordpress /home/wordpress/site
+RUN chown wordpress:wordpress /home/wordpress/.ssh/authorized_keys && chmod 600 /home/wordpress/.ssh/authorized_keys && chown wordpress:wordpress /home/wordpress/site && wget https://br.wordpress.org/wordpress-6.0-pt_BR.tar.gz 
 # Start SSH service
 RUN service ssh start
 # Expose docker port 22
 EXPOSE 22
-CMD ["/usr/sbin/sshd","-D"]
+CMD ["/usr/sbin/sshd", "-D"]

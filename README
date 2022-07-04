@@ -141,8 +141,8 @@ para fins de referência:
 Servidor web: nginx:1.22.0
 Banco de dados: mysql:
 Redis:
-Php:
-Wordpress:
+Php: 8.0
+Wordpress: 6.0
 Certificados digitais ssl:
 Docker: 5:20.10.17~3-0~ubuntu-focal
 Containerd: 1.6.6-1
