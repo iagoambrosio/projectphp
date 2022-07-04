@@ -1,0 +1,9 @@
+FROM alpine:3.16.0
+RUN apk add openssh && ssh-keygen -A 
+COPY ./docker/sftp/ssh_host_rsa_key /etc/ssh/
+COPY ./docker/sftp/ssh_host_rsa_key.pub /etc/ssh/
+COPY ./docker/sftp/sshd_config /etc/ssh/
+RUN adduser -D -s /bin/sh wordpress
+WORKDIR /home/wordpress
+RUN id && mkdir site && chmod 777 ./site
+CMD /bin/sh
