@@ -1,2 +1,6 @@
 #é preciso criar uma rede docker para comunicação entre containers: docker network create projeto
 #é preciso colocar o nome de host também
+
+# container nginx: docker run --rm -it -p 8080 --network projeto  nginx/nginx 
+# container sftp:   docker run --rm -it --network projeto -h sftpserver -p 22 -v ${PWD}/wordpress:/home/wordpress/site/ sftp/sftp:latest
+# container php docker run --rm -it --network projeto -h php -p 80 --network projeto

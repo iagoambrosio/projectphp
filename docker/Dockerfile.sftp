@@ -11,6 +11,8 @@ RUN groupadd wordpress && useradd -ms /bin/bash -p "${USER_WORDPRESS_PASSWORD}" 
 RUN mkdir -p /home/wordpress/.ssh && mkdir -p /home/wordpress/site 
 # Copy the ssh public key in the authorized_keys file. The idkey.pub below is a public key file you get from ssh-keygen. They are under ~/.ssh directory by default.
 COPY ./docker/sftp/id_rsa.pub /home/wordpress/.ssh/authorized_keys
+# Copy ssh config
+COPY ./docker/sftp/sshd_config /etc/ssh/sshd_config
 # change ownership of the key file. 
 RUN chown wordpress:wordpress /home/wordpress/.ssh/authorized_keys && chmod 600 /home/wordpress/.ssh/authorized_keys && chown wordpress:wordpress /home/wordpress/site 
 # Start SSH service
