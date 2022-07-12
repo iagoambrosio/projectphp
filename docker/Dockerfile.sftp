@@ -18,7 +18,7 @@ RUN service ssh start
 #workdir
 WORKDIR /home/wordpress/site
 #USER wordpress
-USER wordpress
+#USER wordpress
 # Expose docker port 22
 EXPOSE 22
 CMD ["/usr/sbin/sshd", "-D"]

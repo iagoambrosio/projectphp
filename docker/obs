@@ -1,0 +1,2 @@
+#é preciso criar uma rede docker para comunicação entre containers: docker network create projeto
+#é preciso colocar o nome de host também

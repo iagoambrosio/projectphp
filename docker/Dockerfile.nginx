@@ -1,6 +1,14 @@
 FROM nginx:1.22.0
 COPY ./docker/nginx/nginx.conf /etc/nginx/
 COPY ./docker/nginx/default.conf /etc/nginx/conf.d/
+# Cria grupos wordpress e usuario wordpress
+RUN groupadd wordpress && useradd -ms /bin/bash -g wordpress wordpress
+#create wordpress directory in home
+RUN mkdir -p /home/wordpress/.ssh && apt update && apt install ssh -y && apt clean
+#copia a chave privada para acessar o container sftp
+COPY ./docker/sftp/id_rsa /home/wordpress/.ssh/authorized_keys
+#change ownership of the key file.
+RUN chown wordpress:wordpress /home/wordpress/.ssh/authorized_keys && chmod 600 /home/wordpress/.ssh/authorized_keys
 EXPOSE 8080
-CMD ["nginx", "-s", "reload"]
+#CMD ["nginx", "-s", "reload"]
 CMD ["nginx", "-g", "daemon off;"]
