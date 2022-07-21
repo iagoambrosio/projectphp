@@ -1,0 +1,71 @@
+version: "2.2"
+
+services:
+
+  nginx:
+    build: ./docker/Dockerfile.nginx 
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - project_php
+  php-fpm:
+    hostname: php
+    build: ./docker/Dockerfile.php
+    volumes:
+      - ./wordpress:/scripts
+    ports:
+      - "9000"
+    networks:
+      - projeto_php
+
+#  mongo:
+#    image: mongo:latest
+#    ports:
+#      - "27017:27017"
+#    networks:
+#      - m1_network
+#  redis:
+#    image: redis
+#    ports:
+#     - "6379:6379"
+#    networks:
+#      - m1_network
+
+  mysql:
+    build: ./docker/Dockerfile.mysql
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+      MYSQL_DATABASE: db
+    ports:
+      - "3306:3306"
+    networks:
+      - projeto_php
+
+#  mailhog:
+#    image: mailhog/mailhog
+#    logging:
+#      driver: 'none'  # disable saving logs
+#    ports:
+#      - 1025:1025 # smtp server
+#      - 8025:8025 # web ui
+#    networks:
+#      - m1_network
+
+#  mailhog:
+#   image: schickling/mailcatcher
+#    logging:
+#      driver: 'none'  # disable saving logs
+#    ports:
+#      - 1025:1025 # smtp server
+#      - 1080:1080 # web ui
+#    networks:
+#      - m1_network
+
+networks:
+  projeto_php:
+    driver: bridge
