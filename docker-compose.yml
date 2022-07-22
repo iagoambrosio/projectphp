@@ -1,9 +1,11 @@
-version: "2.2"
+version: "3"
 
 services:
 
   nginx:
-    build: ./docker/Dockerfile.nginx 
+    build: 
+      context: .
+      dockerfile: ./docker/Dockerfile.nginx
     ports:
       - "80:80"
       - "443:443"
@@ -11,7 +13,9 @@ services:
       - projeto_php
   php-fpm:
     hostname: php
-    build: ./docker/Dockerfile.php
+    build: 
+      context: .
+      dockerfile: ./docker/Dockerfile.php
     volumes:
       - ./wordpress:/scripts
     ports:
@@ -33,7 +37,9 @@ services:
 #      - m1_network
 
   mysql:
-    build: ./docker/Dockerfile.mysql
+    build: 
+      context: .
+      dockerfile: ./docker/Dockerfile.mysql
     volumes:
       - ./docker/mysql:/var/lib/mysql
     environment:
