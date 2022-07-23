@@ -13,6 +13,6 @@ RUN chown wordpress:wordpress /home/wordpress/.ssh/id_rsa && chmod 600 /home/wor
 COPY ./docker/nginx/ssh_config /etc/ssh/ssh_config
 #bind sftp port
 
-EXPOSE 8080
+EXPOSE 8080:8080
 #CMD ["nginx", "-s", "reload"]
 CMD ["nginx", "-g", "daemon off;"]

@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 #enviorment variable for tzdata
 ENV TZ=Etc/UTC
 #install php-fpm8.1
-RUN apt update && apt install php-fpm=2:8.1+92ubuntu1 -y
+RUN apt update && apt install php-fpm=2:8.1+92ubuntu1 php8.1-mysql=8.1.2-1ubuntu2.1 -y
 
 #copia arquivos de configuração
 COPY ./docker/php/php.ini /etc/php/8.1/fpm/php.ini
@@ -20,5 +20,12 @@ RUN mkdir -p /home/wordpress/.ssh
 COPY ./docker/sftp/id_rsa /home/wordpress/.ssh/authorized_keys
 #change ownership of the key file.
 RUN chown wordpress:wordpress /home/wordpress/.ssh/authorized_keys && chmod 600 /home/wordpress/.ssh/authorized_keys 
+
+ENV WORDPRESS_DB_HOST: mysql_compose     
+ENV MYSQL_ROOT_PASSWORD: ""      
+ENV WORDPRESS_DB_NAME: wordpress-db      
+ENV WORDPRESS_DB_USER: wordpress-user     
+ENV WORDPRESS_DB_PASSWORD: ""      
+ENV WORDPRESS_TABLE_PREFIX: wp_
 
 CMD php-fpm8.1 -F

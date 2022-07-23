@@ -3,11 +3,12 @@ version: "3"
 services:
 
   nginx:
+    hostname: nginx_compose
     build: 
       context: .
       dockerfile: ./docker/Dockerfile.nginx
     ports:
-      - "80:80"
+      - "8080:8080"
       - "443:443"
     networks:
       - projeto_php
@@ -37,11 +38,12 @@ services:
 #      - m1_network
 
   mysql:
-    build: 
+    hostname: mysql_compose
+    build:
       context: .
       dockerfile: ./docker/Dockerfile.mysql
-    volumes:
-      - ./docker/mysql:/var/lib/mysql
+#    volumes:
+#      - ./docker/mysql/data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: wordpress

@@ -1,1 +1,10 @@
 FROM mysql:8.0.29
+
+#envs for mysql 
+ENV MYSQL_ROOT_PASSWORD = ""
+ENV MYSQL_ALLOW_EMPTY_PASSWORD = yes
+ENV MYSQL_DATABASE = "wordpress-db"
+ENV MYSQL_USER = "wordpress-user"
+ENV MYSQL_PASSWORD = ""
+
+EXPOSE 3306
