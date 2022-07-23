@@ -18,7 +18,7 @@ services:
       context: .
       dockerfile: ./docker/Dockerfile.php
     volumes:
-      - ./wordpress:/scripts
+      - ./wordpress:/home/wordpress
     ports:
       - "9000:9000"
     networks:
@@ -29,13 +29,13 @@ services:
 #    ports:
 #      - "27017:27017"
 #    networks:
-#      - m1_network
+#      - projeto_php
 #  redis:
 #    image: redis
 #    ports:
 #     - "6379:6379"
 #    networks:
-#      - m1_network
+#      - projeto_php
 
   mysql:
     hostname: mysql_compose
@@ -62,7 +62,7 @@ services:
 #      - 1025:1025 # smtp server
 #      - 8025:8025 # web ui
 #    networks:
-#      - m1_network
+#      - projeto_php
 
 #  mailhog:
 #   image: schickling/mailcatcher
@@ -72,7 +72,7 @@ services:
 #      - 1025:1025 # smtp server
 #      - 1080:1080 # web ui
 #    networks:
-#      - m1_network
+#      - projeto_php
 
 networks:
   projeto_php:
