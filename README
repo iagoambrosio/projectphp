@@ -139,14 +139,15 @@ Para melhor adequarmos a aplicação, colocarei aqui as versões utilizadas na a
 para fins de referência:
 
 Servidor web: nginx:1.22.0
-Banco de dados: mysql:
+Banco de dados: mysql:8.0.29
 Redis:
 Php-fpm: 8.1
-Wordpress: 6.0
+php-mysqli: 8.1.2
+Wordpress: 6.0.1
 Certificados digitais ssl:
 Docker: 5:20.10.17~3-0~ubuntu-focal
 Containerd: 1.6.6-1
-Plugin docker-compose 2.6.0~ubuntu-focal
+Plugin docker-compose: 2.6.0~ubuntu-focal
 
 Aqui começamos a mexer com Dockerfiles para descrever nossas dependencias, é onde começamos a utilizar os
 softwares de automatização, um deles é o docker, em conjunto com o docker-compose, para isso, iremos fazer a instalação padrão do docker e do Docker-compose:

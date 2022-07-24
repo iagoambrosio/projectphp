@@ -17,13 +17,12 @@ services:
     build: 
       context: .
       dockerfile: ./docker/Dockerfile.php
-    env_file:
-      - dev.env
-#    - WORDPRESS_DB_HOST=mysql_compose           
-#    - WORDPRESS_DB_NAME=wordpress-db      
-#    - WORDPRESS_DB_USER=wordpress-user     
-#    - WORDPRESS_DB_PASSWORD=nananana      
-#    - WORDPRESS_TABLE_PREFIX=wp_
+    environment:
+     - WORDPRESS_DB_HOST=mysql_compose           
+     - WORDPRESS_DB_NAME=wordpress-db      
+     - WORDPRESS_DB_USER=wordpress-user     
+     - WORDPRESS_DB_PASSWORD=nananana      
+     - WORDPRESS_TABLE_PREFIX=wp_
     volumes:
       - ./wordpress:/home/wordpress
     ports:
@@ -51,12 +50,11 @@ services:
       dockerfile: ./docker/Dockerfile.mysql
 #    volumes:
 #      - ./docker/mysql/data:/var/lib/mysql
-    env_file:
-      - dev.env
-    #      - MYSQL_ROOT_PASSWORD=teste
-    #  - MYSQL_DATABASE=wordpress-db
-    #  - MYSQL_USER=wordpress-user
-    #  - MYSQL_PASSWORD=nananana
+    environment:
+      - MYSQL_ROOT_PASSWORD=teste
+      - MYSQL_DATABASE=wordpress-db
+      - MYSQL_USER=wordpress-user
+      - MYSQL_PASSWORD=nananana
     ports:
       - "3306:3306"
     networks:

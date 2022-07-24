@@ -21,11 +21,10 @@ COPY ./docker/sftp/id_rsa /home/wordpress/.ssh/authorized_keys
 #change ownership of the key file.
 RUN chown wordpress:wordpress /home/wordpress/.ssh/authorized_keys && chmod 600 /home/wordpress/.ssh/authorized_keys 
 
-ENV WORDPRESS_DB_HOST: mysql_compose     
-ENV MYSQL_ROOT_PASSWORD: ""      
-ENV WORDPRESS_DB_NAME: wordpress-db      
-ENV WORDPRESS_DB_USER: wordpress-user     
-ENV WORDPRESS_DB_PASSWORD: ""      
-ENV WORDPRESS_TABLE_PREFIX: wp_
+ENV WORDPRESS_DB_HOST mysql_compose
+ENV WORDPRESS_DB_NAME wordpress-db
+ENV WORDPRESS_DB_USER wordpress-user
+ENV WORDPRESS_DB_PASSWORD nananana
+ENV WORDPRESS_TABLE_PREFIX wp_
 
 CMD php-fpm8.1 -F
