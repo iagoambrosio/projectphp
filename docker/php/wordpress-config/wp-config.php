@@ -1,5 +1,8 @@
 <?php
 /**
+ * Configuração da imagem padrão do DockerHUB para colher as variaveis de ambiente passadas pelo docker
+ * Apenas para fins de teste
+ * 
  * The base configuration for WordPress
  *
  * The wp-config.php creation script uses this file during the installation.
@@ -13,6 +16,7 @@
  * * Database table prefix
  * * ABSPATH
  *
+ * 
  * This has been slightly modified (to read environment variables) for use in Docker.
  *
  * @link https://wordpress.org/support/article/editing-wp-config-php/
