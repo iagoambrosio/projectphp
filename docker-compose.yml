@@ -18,7 +18,7 @@ services:
       context: .
       dockerfile: ./docker/Dockerfile.php
     env_file:
-      - dev.env
+      - dev_php.env
 #    - WORDPRESS_DB_HOST=mysql_compose           
 #    - WORDPRESS_DB_NAME=wordpress-db      
 #    - WORDPRESS_DB_USER=wordpress-user     
@@ -52,7 +52,7 @@ services:
 #    volumes:
 #      - ./docker/mysql/data:/var/lib/mysql
     env_file:
-      - dev.env
+      - dev_php.env
     #      - MYSQL_ROOT_PASSWORD=teste
     #  - MYSQL_DATABASE=wordpress-db
     #  - MYSQL_USER=wordpress-user

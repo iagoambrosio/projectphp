@@ -1,11 +1,16 @@
-FROM php:8.1.9RC1-fpm-buster
+FROM ubuntu:jammy
 
-RUN docker-php-ext-install mysqli
+#enviroment variables for Debian Frontend
+ENV DEBIAN_FRONTEND=noninteractive 
+#enviorment variable for tzdata
+ENV TZ=Etc/UTC
+#install php-fpm8.1
+RUN apt update && apt install php-fpm=2:8.1+92ubuntu1 -y && apt install php8.1-mysql=8.1.2-1ubuntu2.2 -y
 
 #copia arquivos de configuração
-COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/php.ini
-COPY ./docker/php/php-fpm.conf /usr/local/etc/php-fpm.conf
-COPY ./docker/php/pool.d/www.conf /usr/local/etc/pool.d/www.conf
+COPY ./docker/php/php.ini /etc/php/8.1/fpm/php.ini
+COPY ./docker/php/php-fpm.conf /etc/php/8.1/fpm/php-fpm.conf
+COPY ./docker/php/pool.d/www.conf /etc/php/8.1/fpm/pool.d/www.conf
 
 # Cria grupos wordpress e usuario wordpress
 RUN groupadd wordpress && useradd -ms /bin/bash -g wordpress wordpress
@@ -22,4 +27,4 @@ ENV WORDPRESS_DB_USER wordpress-user
 ENV WORDPRESS_DB_PASSWORD nananana
 ENV WORDPRESS_TABLE_PREFIX wp_
 
-CMD php-fpm -F
+CMD php-fpm8.1 -F
