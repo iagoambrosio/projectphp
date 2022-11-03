@@ -1,0 +1,91 @@
+version: "3"
+
+services:
+
+  nginx:
+    hostname: nginx_compose
+    build: 
+      context: .
+      dockerfile: ./docker/Dockerfile.nginx
+    volumes:
+      - ./docker/certbot/www/:/var/www/certbot/:ro
+      - ./docker/certbot/conf/:/etc/nginx/ssl/:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - projeto_php
+  php-fpm:
+    hostname: php
+    build: 
+      context: .
+      dockerfile: ./docker/Dockerfile.php
+    env_file:
+      - dev_php.env
+    volumes:
+      - ./wordpress:/home/wordpress
+    ports:
+      - "9000:9000"
+    networks:
+      - projeto_php
+
+#  mongo:
+#    image: mongo:latest
+#    ports:
+#      - "27017:27017"
+#    networks:
+#      - projeto_php
+#  redis:
+#    image: redis
+#    ports:
+#     - "6379:6379"
+#    networks:
+#      - projeto_php
+
+  mysql:
+    hostname: mysql_compose
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.mysql
+#    volumes:
+#      - ./docker/mysql/data:/var/lib/mysql
+    env_file:
+      - dev_php.env
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - projeto_php
+
+  certbot:
+    image: certbot/certbot:nightly
+    volumes:
+      - ./docker/certbot/www/:/var/www/certbot/:rw
+      - ./docker/certbot/conf/:/etc/letsencrypt/:rw
+    networks:
+      - projeto_php
+
+#  mailhog:
+#    image: mailhog/mailhog
+#    logging:
+#      driver: 'none'  # disable saving logs
+#    ports:
+#      - 1025:1025 # smtp server
+#      - 8025:8025 # web ui
+#    networks:
+#      - projeto_php
+
+#  mailhog:
+#   image: schickling/mailcatcher
+#    logging:
+#      driver: 'none'  # disable saving logs
+#    ports:
+#      - 1025:1025 # smtp server
+#      - 1080:1080 # web ui
+#    networks:
+#      - projeto_php
+
+networks:
+  projeto_php:
+    driver: bridge

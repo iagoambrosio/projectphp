@@ -2,10 +2,6 @@ server {
     listen       80;
     listen       443;
     server_name  devopers.ddns.net;
-
-    location /.well-know/acme-challenge/ {
-        root /var/www/certbot;
-    }
     #access_log  /var/log/nginx/host.access.log  main;
 
     #location / {
