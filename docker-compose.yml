@@ -8,11 +8,46 @@ services:
       context: .
       dockerfile: ./docker/Dockerfile.nginx
     volumes:
-        - ./docker/certbot/www:/usr/share/nginx/html
-        - ./docker/nginx:/etc/nginx
+        - ./docker/nginx/www:/home/wordpress
+        - ./docker/nginx/config:/etc/nginx
     ports:
       - "80:80"
       - "443:443"
+    networks:
+      - projeto_php
+  mysql:
+    hostname: mysql_compose
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.mysql
+#    volumes:
+#      - ./docker/mysql/data:/var/lib/mysql
+    env_file:
+      - dev_mysql.env
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - projeto_php
+  php-fpm:
+    hostname: php
+    build: 
+      context: .
+      dockerfile: ./docker/Dockerfile.php
+    env_file:
+      - dev_php.env
+    volumes:
+      - ./wordpress:/home/wordpress
+    ports:
+      - "9000:9000"
+    networks:
+      - projeto_php
+  certbot:
+    image: certbot/certbot:nightly
+    volumes:
+      - ./docker/nginx/www/:/home/wordpress/:rw
+      - ./docker/nginx/config/ssl/:/etc/letsencrypt/:rw
     networks:
       - projeto_php
 networks:
