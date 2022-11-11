@@ -21,39 +21,38 @@ Breve explicação sobre como lançar a aplicação:
 
 
 Primeiro desinstalamos versões anteriores:
-
+~~~
 sudo apt-get remove docker docker-engine docker.io containerd runc
-
+~~~
 Em seguida, instalamos algumas das dependências para termos a versão correta do repositório
-
+~~~
 sudo apt-get install \
     ca-certificates \
     curl \
     gnupg \
     lsb-release
-
+~~~
 Adicionamos a GPG keyringS:
-
-
+~~~
 sudo mkdir -p /etc/apt/keyrings &&
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-
+~~~
 
 Adicionando repositório na lista de fontes de instalação :
-
+~~~
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
+~~~
 E por fim atualizamos os repositórios e instalamos uma versão específica, neste caso a <5:20.10.17~3-0~ubuntu-focal>, 1.6.6-1, e 2.6.0~ubuntu-focal,
 colocarei como variável de ambiente desta forma:
-
+~~~
 export DOCKER_VERSAO=5:20.10.17~3-0~ubuntu-focal
 export CONTAINERD_VERSAO=1.6.6-1
 export DOCKER_COMPOSE_PLUGIN_VERSAO=2.6.0~ubuntu-focal
-
+# por fim a instalação
 sudo apt-get install docker-ce=$DOCKER_VERSAO docker-ce-cli=$DOCKER_VERSAO containerd.io=$CONTAINERD_VERSAO docker-compose-plugin=$DOCKER_COMPOSE_PLUGIN_VERSAO
-
+~~~
 
 ##################################################
 
@@ -104,7 +103,7 @@ necessidade de serem repartidos entre equipes.
 Começamos criando um repositório no github, e adicionamos o arquivo README.md,
 preferi criar um arquivo localmente e mandar por upstream em um repositório ja existente
 no github.
-
+~~~
 git init # inicializa o repositório
 
 git add . # adiciona todos os arquivos, neste caso, apenas este README
@@ -123,7 +122,7 @@ resetados
 git reset --soft master # redefine o HEAD atual para o estado da branch master, apenas o HEAD é redefinido, não apaga arquivos
 
 git branch dev && git branch test # criamos as branches dev e test
-
+~~~
 A atenção se remonta a partir de agora para a branch dev, onde desenvolveremos a aplicação, para no final fazermos um merge na branch master, a branch dev 
 deve se concentra em softwares para auxiliar o desenvolvimento em computadores locais, 
 o ambiente deve ser enxuto com todas as variáveis simplificadas, 
@@ -155,26 +154,26 @@ O bom seria automatizar a instalação para utilização de ssl com dominios per
 existem diversas soluções com nginx e certbot instalados juntos, onde passamos apenas o parametro do nome do dominio como variável
 e o certificado é gerado automaticamente, porém, resolvi seguir com o certificado ssl gerado por um container do certbot, incluindo um trecho
 na docker-compose.yml 
-
-' certbot:
+~~~
+  certbot:
     image: certbot/certbot:nightly
     volumes:
       - ./docker/nginx/www/:/home/wordpress/:rw
       - ./docker/nginx/config/ssl/:/etc/letsencrypt/:rw
     networks:
       - projeto_php '
-
+~~~
 E rodando este comando em seguida para acessar o container:
-
-" sudo docker compose run -it --rm --entrypoint ""  certbot sh "
-
-e por fim, gerando o certificado nas pastas certas
-
+~~~
+sudo docker compose run -it --rm --entrypoint ""  certbot sh 
+~~~
+E por fim, gerando o certificado nas pastas certas
+~~~
 certbot certonly --webroot --agree-tos --no-eff-email --email iago_ambrosio@outlook.com  -w /home/wordpress -d devopers.ddns.net
-
+~~~
 Para mudar a pasta ssl identificada pelo nginx, também alterei a configuração padrão
 
-"
+~~~
 # server {
 #    listen 443 ssl http2;
 #    listen [::]:443 ssl http2;
@@ -185,8 +184,8 @@ Para mudar a pasta ssl identificada pelo nginx, também alterei a configuração
 #        root   /usr/share/nginx/html;
 #        index  index.html index.htm;
 #    }
-#} "
-
+#} 
+~~~
 Como não é escopo desta apresentação automatizar esta criação, irei manter sem a geração automatica de ssl por enquanto,
 esta questão está atrelada a issue #1 , e será resolvida mais para frente.
 
