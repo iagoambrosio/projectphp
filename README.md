@@ -17,7 +17,7 @@ https://12factor.net/pt_br/
 
 ##################################################
 
-##Breve explicação sobre como lançar a aplicação:
+## Breve explicação sobre como lançar a aplicação:
 
 
 Primeiro desinstalamos versões anteriores:
@@ -85,7 +85,7 @@ Executar tarefas de administração/gerenciamento como processos pontuais
 
 #####################################################
 
-referência adicional
+### referência adicional
 
 https://stack.desenvolvedor.expert/appendix/docker/
 
