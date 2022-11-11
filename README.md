@@ -17,7 +17,7 @@ https://12factor.net/pt_br/
 
 ##################################################
 
-Breve explicação sobre como lançar a aplicação:
+##Breve explicação sobre como lançar a aplicação:
 
 
 Primeiro desinstalamos versões anteriores:
@@ -56,7 +56,7 @@ sudo apt-get install docker-ce=$DOCKER_VERSAO docker-ce-cli=$DOCKER_VERSAO conta
 
 ##################################################
 
-Explicando os conceitos por trás de cada aplicação:
+## Explicando os conceitos por trás de cada aplicação:
 
 I. Base de Código
 Uma base de código com rastreamento utilizando controle de revisão, muitos deploys
