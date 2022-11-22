@@ -2,7 +2,7 @@ FROM nginx:1.22.0
 # Cria grupos wordpress e usuario wordpress
 RUN groupadd wordpress && useradd -ms /bin/bash -g wordpress wordpress
 #create wordpress directory in home
-RUN mkdir -p /home/wordpress/.ssh && apt update && apt install sshfs certbot=1.12.0-2 python3-certbot-nginx=1.10.1-1  -y && apt clean
+RUN mkdir -p /home/wordpress/.ssh && apt update && apt install sshfs certbot=1.12.0-2 python3-certbot-nginx=1.10.1-1 -y && apt clean && mkdir /etc/ssl/default
 #copia a chave privada para acessar o container sftp
 COPY ./docker/sftp/id_rsa /home/wordpress/.ssh/id_rsa
 #change ownership of the key file.
@@ -13,5 +13,5 @@ EXPOSE 80:80
 EXPOSE 443:443
 #CMD ["nginx", "-s", "reload"]
 #Gen ssl certificade
-#CMD [openssl req -subj '/CN=teste.bak.tr/O=wordpresstest/C=BR' -x509 -nodes  -days 965 -newkey rsa:2048 -keyout /etc/nginx/ssl/private/nginx-selfsigned.key -out /etc/nginx/ssl/nginx-selfsigned.crt]
+RUN openssl req -subj '/CN=teste.bak.tr/O=wordpresstest/C=BR' -x509 -nodes  -days 965 -newkey rsa:2048 -keyout /etc/ssl/default/selfsigned.pem -out /etc/ssl/default/nginx-selfsigned.crt
 CMD ["nginx", "-g", "daemon off;"]
