@@ -1,0 +1,14 @@
+#!/bin/bash
+if [ -d /etc/letsencrypt/live ];
+then
+echo "Já existem certificados SSL na sua raiz, atualizado então para o modo watch"
+else
+certbot certonly --webroot --agree-tos --no-eff-email --email iago_ambrosio@outlook.com -w /home/wordpress -d devopers.ddns.net
+fi
+
+x=1
+while [ $x -eq 1 ] ; do 
+   sleep 50d ;
+   certbot certonly --expand --agree-tos --no-eff-email --email iago_ambrosio@outlook.com -w /home/wordpress -d devopers.ddns.net
+done 
+
