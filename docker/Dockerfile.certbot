@@ -1,0 +1,9 @@
+FROM certbot/certbot
+
+WORKDIR /opt/certbot
+
+COPY ./docker/certbot/watch-certificate.sh /opt/certbot
+
+RUN chmod +x /opt/certbot/watch-certificate.sh && ls -lh
+
+ENTRYPOINT ./watch-certificate.sh

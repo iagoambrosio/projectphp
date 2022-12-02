@@ -43,8 +43,13 @@ services:
       - "9000:9000"
     networks:
       - projeto_php
+
   certbot:
-    image: certbot/certbot:nightly
+    build: 
+      context: .
+      dockerfile: ./docker/Dockerfile.certbot
+    env_file:
+      - dev_certbot.env
     volumes:
       - ./docker/nginx/www/:/home/wordpress/:rw
       - ./docker/nginx/config/ssl/:/etc/letsencrypt/:rw
