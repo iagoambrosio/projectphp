@@ -20,8 +20,6 @@ services:
     build:
       context: .
       dockerfile: ./docker/Dockerfile.mysql
-#    volumes:
-#      - ./docker/mysql/data:/var/lib/mysql
     env_file:
       - dev_mysql.env
     volumes:
@@ -44,17 +42,17 @@ services:
     networks:
       - projeto_php
 
-  certbot:
-    build: 
-      context: .
-      dockerfile: ./docker/Dockerfile.certbot
-    env_file:
-      - dev_certbot.env
-    volumes:
-      - ./docker/nginx/www/:/home/wordpress/:rw
-      - ./docker/nginx/config/ssl/:/etc/letsencrypt/:rw
-    networks:
-      - projeto_php
+#  certbot:
+#    build: 
+#      context: .
+#      dockerfile: ./docker/Dockerfile.certbot
+#    env_file:
+#     - dev_certbot.env
+#    volumes:
+#      - ./docker/nginx/www/:/home/wordpress/:rw
+#      - ./docker/nginx/config/ssl/:/etc/letsencrypt/:rw
+#    networks:
+#      - projeto_php
 networks:
   projeto_php:
     driver: bridge
