@@ -7,7 +7,7 @@ certbot certonly --webroot --agree-tos --no-eff-email --email no-interactive@pro
 fi
 
 y=1
-while [ $y -eq 1] ; do
+while [ $y -eq 1 ] ; do
 x=$(date | cut -d ' ' -f 3)
 
 #arquivo stat /etc/letsencrypt/archive/elementusdesign.duckdns.org/ | grep +0000 | grep Change: | tr -s ' ' | cut -d ' ' -f 2 | sed 's/-/ /g' | cut -d ' ' -f 3 | sed 's/-/ /g' | cut -d ' ' -f 3
